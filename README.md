@@ -119,6 +119,52 @@ In the definitions below, `{servername}` refers to the name of the MCP Server in
 * `{servername}_get_columns` - Retrieves a list of columns for a table. Use the `{servername}_get_tables` tool to get a list of available tables. The output of the tool will be returned in CSV format, with the first line containing column headers.
 * `{servername}_run_query` - Execute a SQL SELECT query
 
+## JSON-RPC Request Examples
+If you are scripting out the requests sent to the MCP Server instead of using an AI Client (e.g. Claude), then you can refer to the JSON payload examples below – following the JSON-RPC 2.0 specification - when calling the available tools. 
+
+#### sap_business_one_get_tables
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "tools/call",
+    "params": {
+        "name": "sap_business_one_get_tables",
+        "arguments": {}
+    }
+}
+```
+
+#### sap_business_one_get_columns
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+        "name": "sap_business_one_get_columns",
+        "arguments": {
+            "table":  "Account"
+        }
+    }
+}
+```
+
+#### sap_business_one_run_query
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 3,
+    "method": "tools/call",
+    "params": {
+        "name": "sap_business_one_run_query",
+        "arguments": {
+            "sql":  "SELECT * FROM [Account] WHERE [IsDeleted] = true"
+        }
+    }
+}
+```
+
 ## Troubleshooting
 1. If you cannot see your CData MCP Server in Claude Desktop, be sure that you have fully quit Claude Desktop (Windows: use the Task Manager, Mac: use the Activity Monitor)
 2. If Claude Desktop is unable to retrieve data, be sure that you have configured your connection properly. Use the Connection String builder to create the connection string (see above) and copy the connection string into the property (.prp) file.
